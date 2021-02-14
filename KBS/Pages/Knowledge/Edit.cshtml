@@ -1,0 +1,53 @@
+﻿@page "{Id:int?}"
+@model KBS.Pages.Knowledge.EditModel
+@{
+//ViewData["Title"] = "Edit";
+}
+
+<h2>@ViewData["Title"]  @Model.FieldText.Text</h2>
+
+
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="FieldText.Id" />
+
+    <div class="form-group">
+        <label asp-for="FieldText.Text"></label>
+        <input asp-for="FieldText.Text" class="form-control" />
+        <span class="text-danger" asp-validation-for="FieldText.Text" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FieldText.Keywords"></label>
+        <input asp-for="FieldText.Keywords" class="form-control" />
+        <span class="text-danger" asp-validation-for="FieldText.Keywords" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FieldText.RelatedMaterialsLinks"></label>
+        <textarea asp-for="FieldText.RelatedMaterialsLinks" class="form-control" cols="80" rows="5"> </textarea>
+        <span class="text-danger" asp-validation-for="FieldText.RelatedMaterialsLinks" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="FieldText.Usecases"></label>
+
+        <textarea asp-for="FieldText.Usecases" class="form-control" cols="80" rows="5"> </textarea>
+        <span class="text-danger" asp-validation-for="FieldText.Usecases" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FieldText.FieldType"></label>
+        <select asp-for="FieldText.FieldType" asp-items="Model.Languages" class="form-control"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="/Knowledge/ClientLanguages" class="btn btn-primary">Cancel</a>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

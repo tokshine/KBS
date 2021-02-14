@@ -1,0 +1,113 @@
+﻿@page
+@model KBS.Pages.Knowledge.ClientLanguagesModel
+@{
+    ViewBag.Title = "Client Language";
+}
+<div class="container">
+    <div style="margin: 10px">
+        @if (Model.Message != null)
+        {
+            <div class="alert alert-info">@Model.Message</div>
+
+        }
+        
+            <a asp-page=".\Edit" class="btn btn-primary">Add New </a>
+        
+
+        <div class="box box-body box-info">
+
+            <table class="table" id="languages">
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>key words</th>
+                        <th>Field Type</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+       
+            <a asp-page=".\Edit" class="btn btn-primary">Add New </a>
+       
+        </div>
+    </div>
+
+    @section Scripts {
+
+        <environment include="Development">
+            <script src="~/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+            <script src="~/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+            <link href="~/node_modules/datatables.net-bs/css/dataTables.bootstrap.css" rel="stylesheet" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css" />
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
+        </environment>
+
+        <script>
+
+            $(function () {
+
+                var fieldTypes = [
+                    "NONE",
+                    "SECURITY",
+                    "NETWORK",
+                    "XAMARIN",
+                    "REACT",
+                    "ANGULAR",
+                    "ENGLISH",
+                    "NIGERIA",
+                    "TECHNICAL_JARGONS",
+                    "UNITED_KINGDOM",
+                    "ASP_NET_CORE",
+                    "UNITED_STATES",
+                    "UI_UX_DESIGN"
+                    //add new field type here
+                ]
+
+                $.ajax("/api/knowledge/",
+                    { method: "get" })
+                    .then(function (response) {
+                        $("#languages").dataTable({
+                            data: response,
+                            columns: [
+                                { "data": "text" },
+                                { "data": "keywords" },
+                                {
+                                    "data": "fieldType", "render": function (data) {
+
+                                        return fieldTypes[data];
+                                    }
+                                },
+                                {
+                                    "data": "id", "render": function (data) {
+
+                                        data = "/Knowledge/Edit/" + data;
+                                        return "<a class=\"btn btn-lg\" href=\" " + data + "\"><i class=\"glyphicon glyphicon-edit\"></i></a>";
+                                    }
+                                },
+                                {
+                                    "data": "id", "render": function (data) {
+
+                                        data = "/Knowledge/Delete/" + data;
+                                        return "<a class=\"btn btn-lg\" href=\" " + data + "\"><i class=\"glyphicon glyphicon-trash\"></i></a>";
+                                    }
+                                }
+                            ]
+                        });
+                    });
+            });
+
+
+        </script>
+    }
+

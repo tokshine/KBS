@@ -1,0 +1,15 @@
+﻿@page "{Id}"
+@model KBS.Pages.Knowledge.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h2>Delete!</h2>
+<div class="alert alert-danger">
+    Are you sure you want to delete @Model.FieldText.Text?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Yes!</button>
+    <a asp-page="ClientLanguages" class="btn btn-default">Cancel</a>
+</form>
