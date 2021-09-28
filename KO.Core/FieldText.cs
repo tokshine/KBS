@@ -20,7 +20,13 @@ namespace KO.Core
         UNITED_KINGDOM,
         ASP_NET_CORE,
         UNITED_STATES,
-        UI_UX_DESIGN
+        UI_UX_DESIGN,
+        GIT,
+        IIS,
+        THE_WORLD,
+        IDOMS,
+        MY_BELIEF
+        
         //add new field type here
 }
     public class FieldText
